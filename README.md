@@ -96,50 +96,50 @@ Used for dynamic objects. By estimating both Position and Velocity, the filter c
 ### Mathematical Model
 
 **State Vector ($x$):**
-$$
+```math
 x = \begin{bmatrix} p \\ v \end{bmatrix}
-$$
+```
 
 **State Transition Matrix ($F$):**
-$$
+```math
 F = \begin{bmatrix} 1 & dt \\ 0 & 1 \end{bmatrix}
-$$
+```
 
 **Observation Matrix ($H$):**
-$$
+```math
 H = \begin{bmatrix} 1 & 0 \end{bmatrix}
-$$
+```
 
 **Process Noise Covariance ($Q$):**
-$$
+```math
 Q = \begin{bmatrix} q_{pos} & 0 \\ 0 & q_{vel} \end{bmatrix}
-$$
+```
 
 **Measurement Noise Covariance ($R$):**
-$$
+```math
 R = \begin{bmatrix} r_{pos} \end{bmatrix}
-$$
+```
 
 This utilizes the full matrix equations provided by CMSIS-DSP:
 
 **Predict:**
-$$
+```math
 \hat{x}_{k|k-1} = F \hat{x}_{k-1|k-1}
-$$
-$$
+```
+```math
 P_{k|k-1} = F P_{k-1|k-1} F^T + Q
-$$
+```
 
 **Update:**
-$$
+```math
 K_k = P_{k|k-1} H^T (H P_{k|k-1} H^T + R)^{-1}
-$$
-$$
+```
+```math
 \hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k (z_k - H \hat{x}_{k|k-1})
-$$
-$$
+```
+```math
 P_{k|k} = (I - K_k H) P_{k|k-1}
-$$
+```
 
 ### How to Use
 ```c
