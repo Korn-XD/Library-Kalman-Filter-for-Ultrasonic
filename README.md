@@ -4,23 +4,7 @@ This repository contains the custom C libraries developed for **FRA233 Lab 3: Es
 
 ---
 
-## 📋 Criteria Verification Checklist
 
-This library is designed specifically to meet the evaluation criteria specified in the laboratory guidelines:
-
-- ✅ **Criteria P2-B (HC-SR04 Library):** 
-  - File separated cleanly (`hcsr04.h`, `hcsr04.c`).
-  - Employs Timer Input Capture instead of simple delay polling.
-  - Implements standard physics equation $s = T_{echo} \times \frac{v_{sound}}{2}$.
-- ✅ **Criteria P2-C (Discrete KF 1-State):**
-  - Custom 1D Kalman implementation.
-  - Evaluates static state ($x = \text{position}$) considering process ($Q$) and measurement ($R$) noise.
-- ✅ **Criteria P3 (Discrete KF 2-State):**
-  - Extends implementation to 2 states ($x_1 = \text{position}, x_2 = \text{velocity}$).
-  - Fully utilizes Matrix Operations via `arm_math.h` (CMSIS-DSP).
-  - Handles matrix multiplication, transposition, and inversion for predictions and updates.
-
----
 
 ## 🛠️ 1. HC-SR04 Sensor Library
 
