@@ -94,25 +94,52 @@ while(1) {
 Used for dynamic objects. By estimating both Position and Velocity, the filter can anticipate where the object will be, heavily reducing the "lag" typically seen in heavy 1D filtering.
 
 ### Mathematical Model
-- **State ($x$):** 
-  $$ x = \begin{bmatrix} p \\ v \end{bmatrix} $$
-- **State Transition ($F$):** 
-  $$ F = \begin{bmatrix} 1 & dt \\ 0 & 1 \end{bmatrix} $$
-- **Observation ($H$):** 
-  $$ H = \begin{bmatrix} 1 & 0 \end{bmatrix} $$
-- **Process Noise ($Q$):** 
-  $$ Q = \begin{bmatrix} q_{pos} & 0 \\ 0 & q_{vel} \end{bmatrix} $$
-- **Measurement Noise ($R$):** 
-  $$ R = \begin{bmatrix} r_{pos} \end{bmatrix} $$
+
+**State Vector ($x$):**
+$$
+x = \begin{bmatrix} p \\ v \end{bmatrix}
+$$
+
+**State Transition Matrix ($F$):**
+$$
+F = \begin{bmatrix} 1 & dt \\ 0 & 1 \end{bmatrix}
+$$
+
+**Observation Matrix ($H$):**
+$$
+H = \begin{bmatrix} 1 & 0 \end{bmatrix}
+$$
+
+**Process Noise Covariance ($Q$):**
+$$
+Q = \begin{bmatrix} q_{pos} & 0 \\ 0 & q_{vel} \end{bmatrix}
+$$
+
+**Measurement Noise Covariance ($R$):**
+$$
+R = \begin{bmatrix} r_{pos} \end{bmatrix}
+$$
 
 This utilizes the full matrix equations provided by CMSIS-DSP:
-- **Predict:**
-  $$ \hat{x}_{k|k-1} = F \hat{x}_{k-1|k-1} $$
-  $$ P_{k|k-1} = F P_{k-1|k-1} F^T + Q $$
-- **Update:**
-  $$ K_k = P_{k|k-1} H^T (H P_{k|k-1} H^T + R)^{-1} $$
-  $$ \hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k (z_k - H \hat{x}_{k|k-1}) $$
-  $$ P_{k|k} = (I - K_k H) P_{k|k-1} $$
+
+**Predict:**
+$$
+\hat{x}_{k|k-1} = F \hat{x}_{k-1|k-1}
+$$
+$$
+P_{k|k-1} = F P_{k-1|k-1} F^T + Q
+$$
+
+**Update:**
+$$
+K_k = P_{k|k-1} H^T (H P_{k|k-1} H^T + R)^{-1}
+$$
+$$
+\hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k (z_k - H \hat{x}_{k|k-1})
+$$
+$$
+P_{k|k} = (I - K_k H) P_{k|k-1}
+$$
 
 ### How to Use
 ```c
