@@ -84,7 +84,7 @@ x = \begin{bmatrix} p \\ v \end{bmatrix}
 
 **State Transition Matrix ($F$):**
 ```math
-F = \begin{bmatrix} 1 & dt \\ 0 & 1 \end{bmatrix}
+F = \begin{bmatrix} 1 & dt \\ -\frac{k}{m}dt & 1 - \frac{c}{m}dt \end{bmatrix}
 ```
 
 **Observation Matrix ($H$):**
